@@ -12,10 +12,10 @@
 #define TCS3200_LED 9
 
 // ¿ Que pasa si aumentamos la velocidad ?
-#define SERVO_PEEKPOWER 98
+#define SERVO_PEEKPOWER 120
 #define SERVO_STOPPOWER 90
-#define IRinterval  100
-#define SMinterval  200
+#define IRinterval  50
+#define SMinterval  100
 const int buttonPin = 2;
 const int motorPin =  10;
 const int IRPin =  3; 
