@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #define SERIAL_DEBUG
-#include "ColorMenu.h"
+
 #include "TCS3200Debug.h"
 #include <Bounce2.h>
 #include <Servo.h>
@@ -18,6 +18,29 @@
 #define DRUMSERVO_PIN 9
 #define SELECTORSERVO_PIN 10
 #define IRinterval 10
+
+#define LCD_SUPPORT true
+#define LCD_I2C_DIR 0x3f
+#define LCD_I2C_COLUMNS 16
+#define LCD_I2C_ROWS 2
+
+#ifndef LCD_I2C_COLUMNS
+#define LCD_I2C_COLUMNS 16
+#endif
+
+#ifndef LCD_I2C_ROWS
+#define LCD_I2C_ROWS 2
+#endif
+#ifdef LCD_SUPPORT
+// Encoder /////////////////////////////////////
+#define encA 11
+#define encB 12
+// this encoder has a button here
+#define encBtn 13
+#define ENC_SENSIVITY 4
+#endif
+
+#include "ColorMenu.h"
 
 uint8_t SERVO_PEEKPOWER = 102;
 uint8_t SERVO_STOPPOWER = 90;
@@ -62,6 +85,12 @@ void setup() {
 #ifdef _TCS3200COLORSM_H
 	servoSelector.attach(SELECTORSERVO_PIN);
 	colorSMInit();
+#endif
+#ifdef LCD_SUPPORT
+	encoder.begin();
+	lcd.begin(16, 2);
+	lcd.setBacklight(255);
+	lcd.setCursor(0, 0);
 #endif
 	colorSMTest();
 }

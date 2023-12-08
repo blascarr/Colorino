@@ -51,4 +51,4 @@ MENU(mainMenu, "Main Menu", doNothing, noEvent, wrapStyle,
 #endif
 );
 
-NAVROOT(nav, mainMenu, MAX_DEPTH, serial, out); // the navigation root object
+NAVROOT(nav, mainMenu, MAX_DEPTH, in, out); // the navigation root object
