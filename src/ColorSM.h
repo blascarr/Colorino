@@ -30,14 +30,12 @@ void nextState() {
 	currentState = static_cast<STATE>((currentState + 1) % NUM_STATES);
 }
 void S0_entry() {
-	Serial.println("Candy Entry");
 	if (colorDrum.executeOnce) {
 		currentState = ENTRY;
 	}
 }
 
 void S1_moveDrum() {
-	Serial.println("Move Drum");
 	if (colorDrum.executeOnce) {
 
 		servoDrum.write(SERVO_PEEKPOWER);

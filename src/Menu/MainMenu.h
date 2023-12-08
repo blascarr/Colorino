@@ -9,7 +9,6 @@ result readColor(eventMask e, navNode &nav, prompt &item) {
 result nextDrumStep(eventMask e, navNode &nav, prompt &item) {
 	currentTestState = MOVEDRUM;
 	SMTickerTest.resume();
-	Serial.println("Ticker Test Resume");
 	return proceed;
 }
 
@@ -30,6 +29,8 @@ MENU(calibrationMenu, "CALIBRATE SENSOR", doNothing, noEvent, noStyle,
 	 SUBMENU(manualCalibrationMenu),
 	 OP("NEURONA CALIBRATION", doNothing, enterEvent) // Training in Neuron
 	 ,
+	 FIELD(manualServoCal, "SERVO VEL", "", 0, 180, 1, 0, manualServoCalibrate,
+		   enterEvent, noStyle),
 	 EXIT("<Back"));
 #endif
 

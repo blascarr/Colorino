@@ -41,4 +41,9 @@ result manualCalibrate(eventMask e, navNode &nav, prompt &item) {
 	return proceed;
 }
 
+result manualServoCalibrate(eventMask e, navNode &nav, prompt &item) {
+	SERVO_PEEKPOWER = manualServoCal;
+	return proceed;
+}
+
 #endif
