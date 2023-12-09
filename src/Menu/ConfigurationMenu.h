@@ -49,33 +49,33 @@ result LEDToReadEvent(eventMask e, navNode &nav, prompt &item) {
 	return proceed;
 }
 
-TOGGLE(ledState, LEDToggle, "LED: ", doNothing, noEvent, noStyle,
-	   VALUE("ON", HIGH, ledEvent, enterEvent),
-	   VALUE("OFF", LOW, ledEvent, enterEvent));
+TOGGLE(ledState, LEDToggle, LED_MSG, doNothing, noEvent, noStyle,
+	   VALUE(ON_MSG, HIGH, ledEvent, enterEvent),
+	   VALUE(OFF_MSG, LOW, ledEvent, enterEvent));
 
-TOGGLE(ledToReadState, LEDToReadToggle, "LED TO READ: ", doNothing, noEvent,
-	   noStyle, VALUE("OFF", 0, LEDToReadEvent, enterEvent),
-	   VALUE("ONREAD", 1, LEDToReadEvent, enterEvent),
-	   VALUE("ON", 2, LEDToReadEvent, enterEvent));
+TOGGLE(ledToReadState, LEDToReadToggle, LEDREAD_MSG, doNothing, noEvent,
+	   noStyle, VALUE(OFF_MSG, 0, LEDToReadEvent, enterEvent),
+	   VALUE(ONREAD_MSG, 1, LEDToReadEvent, enterEvent),
+	   VALUE(ON_MSG, 2, LEDToReadEvent, enterEvent));
 
-TOGGLE(freq, frequencyToggle, "SET FREQ: ", doNothing, noEvent, noStyle,
-	   VALUE("HIGH", TCS3200_FREQ_HI, setFrequency, enterEvent),
-	   VALUE("MID", TCS3200_FREQ_MID, setFrequency, enterEvent),
-	   VALUE("LOW", TCS3200_FREQ_LO, setFrequency, enterEvent),
-	   VALUE("LOW", TCS3200_FREQ_OFF, setFrequency, enterEvent));
+TOGGLE(freq, frequencyToggle, SETFREQ_MSG, doNothing, noEvent, noStyle,
+	   VALUE(HIGH_MSG, TCS3200_FREQ_HI, setFrequency, enterEvent),
+	   VALUE(MID_MSG, TCS3200_FREQ_MID, setFrequency, enterEvent),
+	   VALUE(LOW_MSG, TCS3200_FREQ_LO, setFrequency, enterEvent),
+	   VALUE(OFF_MSG, TCS3200_FREQ_OFF, setFrequency, enterEvent));
 
-TOGGLE(rgbState, RGBToggle, "RGB MODE: ", doNothing, noEvent, noStyle,
-	   VALUE("RGB", HIGH, rgbMode, enterEvent),
-	   VALUE("RAW", LOW, rgbMode, enterEvent));
+TOGGLE(rgbState, RGBToggle, RGBMODE_MSG, doNothing, noEvent, noStyle,
+	   VALUE(RGB_MSG, HIGH, rgbMode, enterEvent),
+	   VALUE(RAW_MSG, LOW, rgbMode, enterEvent));
 
-MENU(configurationMenu, "SENSOR CONFIGURATION", doNothing, noEvent, noStyle,
+MENU(configurationMenu, SENSORCONFIG_MSG, doNothing, noEvent, noStyle,
 	 SUBMENU(LEDToggle),
-	 FIELD(refreshTime, "Refresh Time", "", 0, 1000, 100, 10, setRefreshTime,
+	 FIELD(refreshTime, REFRESHTIME_MSG, VOID_MSG, 0, 1000, 100, 10,
+		   setRefreshTime, enterEvent, wrapStyle),
+	 FIELD(samples, SAMPLES_MSG, VOID_MSG, 0, 500, 50, 10, setSamples,
 		   enterEvent, wrapStyle),
-	 FIELD(samples, "Samples", "", 0, 500, 50, 10, setSamples, enterEvent,
-		   wrapStyle),
-	 SUBMENU(RGBToggle), OP("RELATIVE COLOR", readRelativeColor, enterEvent),
+	 SUBMENU(RGBToggle), OP(REALATIVECOLOR_MSG, readRelativeColor, enterEvent),
 	 SUBMENU(LEDToReadToggle), SUBMENU(frequencyToggle),
-	 OP("GET FREQUENCY", getFrequency, enterEvent), EXIT("<Back"));
+	 OP(GETFREQUENCY_MSG, getFrequency, enterEvent), EXIT(BACK_MSG));
 
 #endif

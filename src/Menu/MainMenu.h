@@ -13,30 +13,30 @@ result nextDrumStep(eventMask e, navNode &nav, prompt &item) {
 }
 
 #ifdef _TCS3200CALIBRATIONMENU_H
-MENU(manualCalibrationMenu, "MANUAL CALIBRATION", doNothing, noEvent, noStyle,
-	 FIELD(manualColorCal, "COLOR", "", 0, 7, 1, 0, manualCalibrate, enterEvent,
-		   noStyle),
-	 OP("SAVE COLOR", SaveColor, enterEvent),
-	 OP("NEXT DRUM STEP", nextDrumStep, enterEvent),
-	 OP("SAVE EEPROM COLOR TABLE", saveCT, enterEvent), EXIT("<Back"));
-
-MENU(calibrationMenu, "CALIBRATE SENSOR", doNothing, noEvent, noStyle,
-	 OP("DARK CALIBRATION", darkCal, enterEvent),
-	 OP("WHITE CALIBRATION", whiteCal, enterEvent),
-	 OP("NEXT DRUM STEP", nextDrumStep, enterEvent),
-	 OP("CURRENT DARK VALUE CALIBRATED ", currentDarkCal, enterEvent),
-	 OP("CURRENT WHITE VALUE CALIBRATED ", currentWhiteCal, enterEvent),
-	 SUBMENU(manualCalibrationMenu),
-	 OP("NEURONA CALIBRATION", doNothing, enterEvent) // Training in Neuron
-	 ,
-	 FIELD(manualServoCal, "SERVO VEL", "", 0, 180, 1, 0, manualServoCalibrate,
+MENU(manualCalibrationMenu, MANUALCALIBRATION_MSG, doNothing, noEvent, noStyle,
+	 FIELD(manualColorCal, COLOR_MSG, VOID_MSG, 0, 7, 1, 0, manualCalibrate,
 		   enterEvent, noStyle),
-	 EXIT("<Back"));
+	 OP(SAVECOLOR_MSG, SaveColor, enterEvent),
+	 OP(NEXTDRUMSTEP_MSG, nextDrumStep, enterEvent),
+	 OP(SAVECOLORTABLE_MSG, saveCT, enterEvent), EXIT(BACK_MSG));
+
+MENU(calibrationMenu, CALIBRATE_MSG, doNothing, noEvent, noStyle,
+	 OP(DARKCALIBRATION_MSG, darkCal, enterEvent),
+	 OP(WHITECALIBRATION_MSG, whiteCal, enterEvent),
+	 OP(NEXTDRUMSTEP_MSG, nextDrumStep, enterEvent),
+	 OP(CURRENTDARK_MSG, currentDarkCal, enterEvent),
+	 OP(CURRENTWHITE_MSG, currentWhiteCal, enterEvent),
+	 SUBMENU(manualCalibrationMenu),
+	 OP(NEURONACALIBRATION_MSG, doNothing, enterEvent) // Training in Neuron
+	 ,
+	 FIELD(manualServoCal, SERVOVEL_MSG, VOID_MSG, 0, 180, 1, 0,
+		   manualServoCalibrate, enterEvent, noStyle),
+	 EXIT(BACK_MSG));
 #endif
 
-MENU(mainMenu, "Main Menu", doNothing, noEvent, wrapStyle,
-	 OP("READ COLOR", readColor, enterEvent),
-	 OP("NEXT DRUM STEP", nextDrumStep, enterEvent)
+MENU(mainMenu, MAINMENU_MSG, doNothing, noEvent, wrapStyle,
+	 OP(READCOLOR_MSG, readColor, enterEvent),
+	 OP(NEXTDRUMSTEP_MSG, nextDrumStep, enterEvent)
 #ifdef _TCS3200CALIBRATIONMENU_H
 		 ,
 	 SUBMENU(calibrationMenu)

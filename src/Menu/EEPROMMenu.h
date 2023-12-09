@@ -21,10 +21,10 @@ result readColorTable(eventMask e, navNode &nav, prompt &item) {
 	return proceed;
 }
 
-MENU(eepromMenu, "EEPROM CONFIGURATION", doNothing, noEvent, noStyle,
-	 OP("CURRENT COLOR TABLE", readColorTable, enterEvent),
-	 OP("LOAD BW EEPROM", loadBW, enterEvent),
-	 OP("LOAD COLOR TABLE", loadCT, enterEvent),
-	 OP("FACTORY COLOR TABLE", factoryCT, enterEvent), EXIT("<Back"));
+MENU(eepromMenu, EEPROMCONFIG_MSG, doNothing, noEvent, noStyle,
+	 OP(CURRENTTABLE_MSG, readColorTable, enterEvent),
+	 OP(LOADBW_MSG, loadBW, enterEvent),
+	 OP(LOADCOLORTABLE_MSG, loadCT, enterEvent),
+	 OP(FACTORYCOLORTABLE_MSG, factoryCT, enterEvent), EXIT(BACK_MSG));
 
 #endif

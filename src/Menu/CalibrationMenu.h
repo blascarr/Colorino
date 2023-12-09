@@ -36,7 +36,7 @@ result currentWhiteCal(eventMask e, navNode &nav, prompt &item) {
 
 result manualCalibrate(eventMask e, navNode &nav, prompt &item) {
 	Serial.println(manualColorCal);
-	Serial.print(" - Calibrate Color: ");
+	Serial.print(CALIBRATECOLOR_MSG);
 	Serial.println(colorNames[manualColorCal]);
 	return proceed;
 }
