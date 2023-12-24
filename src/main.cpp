@@ -28,19 +28,20 @@ float selectorOffset = 0;
 
 Bounce IREvent = Bounce();
 
-bool IRFired = false;
+bool IRFired = true;
 int currentColor = 0;
 
 void handleIREvent() {
 	IREvent.update();
 	if (IREvent.changed()) {
 		bool debouncedInput = IREvent.read();
-		IRFired = debouncedInput == false;
+		IRFired = debouncedInput == IR_INPUT_PULLUP;
 	}
 }
 
-// #include "ColorSM.h"
-#include "CalibratorSM.h"
+#include "ColorSM.h"
+
+// #include "CalibratorSM.h"
 #include "MenuEvents.h"
 
 void setup() {
@@ -59,9 +60,11 @@ void setup() {
 	CS.loadCT();
 
 	servoSelector.attach(SELECTORSERVO_PIN);
-	uServoCal = servoSelector.readMicroseconds();
 #ifdef _TCS3200COLORSM_H
 	colorSMInit();
+#endif
+#ifdef _RESETSM_H
+	resetSMTicker.start();
 #endif
 #ifdef LCD_SUPPORT_BOARD
 	encoder.begin();
@@ -69,7 +72,9 @@ void setup() {
 	lcd.setBacklight(255);
 	lcd.setCursor(0, 0);
 #endif
+#ifdef _TCS3200CALIBRATIONSM_H
 	colorSMTest();
+#endif
 }
 
 void loop() {
@@ -77,6 +82,11 @@ void loop() {
 #ifdef _TCS3200COLORSM_H
 	SMTicker.update();
 #endif
+#ifdef _RESETSM_H
+	resetSMTicker.update();
+#endif
+#ifdef _TCS3200CALIBRATIONSM_H
 	SMTickerTest.update();
+#endif
 	nav.poll();
 }
