@@ -17,7 +17,6 @@
 #if !CONTINUOUS_COLORSM
 bool resetSMSignal = false;
 #endif
-#define SERIAL_CONTINUOUS_COLORSM false
 
 #define LCD_SUPPORT true
 

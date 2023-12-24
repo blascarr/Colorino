@@ -11,7 +11,6 @@ Ticker SMTicker(handleSMRun, SMinterval, 0, MILLIS);
 #if CONTINUOUS_COLORSM
 #define NUM_STATES 5
 #else
-#include "ResetSM.h"
 #define NUM_STATES 6
 #endif
 

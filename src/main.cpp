@@ -63,9 +63,6 @@ void setup() {
 #ifdef _TCS3200COLORSM_H
 	colorSMInit();
 #endif
-#ifdef _RESETSM_H
-	resetSMTicker.start();
-#endif
 #ifdef LCD_SUPPORT_BOARD
 	encoder.begin();
 	lcd.begin(16, 2);
@@ -81,9 +78,6 @@ void loop() {
 	handleIREvent();
 #ifdef _TCS3200COLORSM_H
 	SMTicker.update();
-#endif
-#ifdef _RESETSM_H
-	resetSMTicker.update();
 #endif
 #ifdef _TCS3200CALIBRATIONSM_H
 	SMTickerTest.update();
