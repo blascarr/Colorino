@@ -13,6 +13,7 @@
 #define IRinterval 10
 
 #define LCD_SUPPORT true
+
 #define LCD_I2C_DIR 0x3f
 #define LCD_I2C_COLUMNS 16
 #define LCD_I2C_ROWS 2
@@ -25,7 +26,11 @@
 #define LCD_I2C_ROWS 2
 #endif
 
-#ifdef LCD_SUPPORT
+#if (defined(LCD_SUPPORT) && !defined(ARDUINO_AVR_UNO))
+#define LCD_SUPPORT_BOARD
+#endif
+
+#ifdef LCD_SUPPORT_BOARD
 #include "Menu/LCD_MSG_Definition.h"
 // Encoder /////////////////////////////////////
 #define encA 11

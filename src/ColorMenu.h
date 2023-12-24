@@ -9,7 +9,7 @@
 
 using namespace Menu;
 
-#ifdef LCD_SUPPORT
+#ifdef LCD_SUPPORT_BOARD
 #include <LiquidCrystal_PCF8574.h>
 #include <Wire.h>
 #include <menuIO/PCF8574Out.h>	//arduino I2C LCD

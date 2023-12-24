@@ -58,7 +58,7 @@ void setup() {
 	servoSelector.attach(SELECTORSERVO_PIN);
 	colorSMInit();
 #endif
-#ifdef LCD_SUPPORT
+#ifdef LCD_SUPPORT_BOARD
 	encoder.begin();
 	lcd.begin(16, 2);
 	lcd.setBacklight(255);
