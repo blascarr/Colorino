@@ -5,10 +5,6 @@
 #define NUM_STATES 5
 #define SMinterval 100
 
-Servo servoSelector;
-float positions[] = {0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180};
-float selectorOffset = 5;
-
 enum STATE {
 	ENTRY = 0,
 	MOVECANDYTOSENSOR = 1,

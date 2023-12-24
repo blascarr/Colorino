@@ -19,7 +19,8 @@ const char *colorNames[] = {"WHITE", "BLACK", "YELLOW", "ORANGE",
 enum RGBMode { RGB, RAW };
 int manualColorCal = 0;
 int manualServoCal = SERVO_PEEKPOWER;
-RGBMode rgbState = RGB; // Establecer el modo por defecto a RGB
+int uServoCal = 0;
+RGBMode rgbState = RGB; // Default Mode - RGB
 String freqStates[4] = {" - HIGH 100%", " - MID 20%", " - LOW 2%", " - OFF 0%"};
 
 #include "Menu/CalibrationMenu.h"

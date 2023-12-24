@@ -35,15 +35,58 @@ result currentWhiteCal(eventMask e, navNode &nav, prompt &item) {
 }
 
 result manualCalibrate(eventMask e, navNode &nav, prompt &item) {
-	Serial.println(manualColorCal);
+	Serial.print(manualColorCal);
 	Serial.print(CALIBRATECOLOR_MSG);
 	Serial.println(colorNames[manualColorCal]);
 	return proceed;
 }
 
 result manualServoCalibrate(eventMask e, navNode &nav, prompt &item) {
-	SERVO_PEEKPOWER = manualServoCal;
+	Serial.print("Servo: ");
+	Serial.println(manualServoCal);
+	servoSelector.write(manualServoCal + selectorOffset);
 	return proceed;
 }
 
+result uServoCalibrate(eventMask e, navNode &nav, prompt &item) {
+	Serial.print("Servo: ");
+	Serial.println(uServoCal);
+	servoSelector.writeMicroseconds(uServoCal);
+	return proceed;
+}
+
+result getuServoCalibrate(eventMask e, navNode &nav, prompt &item) {
+	Serial.print("Servo: ");
+	Serial.println(servoSelector.readMicroseconds());
+	return proceed;
+}
+
+result servoPositionsCalibrate(eventMask e, navNode &nav, prompt &item) {
+	Serial.print("Pos[ ");
+	Serial.print(manualColorCal);
+	Serial.print(" ] = ");
+	Serial.println(manualServoCal);
+	servoSelector.write(manualServoCal);
+	positions[manualColorCal] = manualServoCal;
+	return proceed;
+}
+
+result moveToServoPositionsCalibrate(eventMask e, navNode &nav, prompt &item) {
+	Serial.print("Pos[ ");
+	Serial.print(manualColorCal);
+	Serial.print(" ] = ");
+	Serial.println(positions[manualColorCal]);
+	servoSelector.write(positions[manualColorCal]);
+	return proceed;
+}
+
+result getPosServoCalibrate(eventMask e, navNode &nav, prompt &item) {
+	for (int pos = 0; pos < SIZECOLORS; pos++) {
+		Serial.print("Pos[ ");
+		Serial.print(pos);
+		Serial.print(" ] = ");
+		Serial.println(positions[pos]);
+	}
+	return proceed;
+}
 #endif

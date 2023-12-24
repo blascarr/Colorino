@@ -22,6 +22,9 @@ TCS3200 CS(TCS3200_S2, TCS3200_S3, TCS3200_OUT, TCS3200_S0, TCS3200_S1,
 SerialDebugger SerialDebug = SerialDebugger();
 TCS3200Debug CSDebug(CS, SerialDebug);
 Servo servoDrum;
+Servo servoSelector;
+float positions[] = {0, 25, 50, 78, 113, 140, 170, 170};
+float selectorOffset = 0;
 
 Bounce IREvent = Bounce();
 
@@ -54,8 +57,10 @@ void setup() {
 	CS.setFrequency(TCS3200_FREQ_HI);
 	CS.loadBW();
 	CS.loadCT();
-#ifdef _TCS3200COLORSM_H
+
 	servoSelector.attach(SELECTORSERVO_PIN);
+	uServoCal = servoSelector.readMicroseconds();
+#ifdef _TCS3200COLORSM_H
 	colorSMInit();
 #endif
 #ifdef LCD_SUPPORT_BOARD

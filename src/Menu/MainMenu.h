@@ -18,7 +18,11 @@ MENU(manualCalibrationMenu, MANUALCALIBRATION_MSG, doNothing, noEvent, noStyle,
 		   enterEvent, noStyle),
 	 OP(SAVECOLOR_MSG, SaveColor, enterEvent),
 	 OP(NEXTDRUMSTEP_MSG, nextDrumStep, enterEvent),
-	 OP(SAVECOLORTABLE_MSG, saveCT, enterEvent), EXIT(BACK_MSG));
+	 OP(SAVECOLORTABLE_MSG, saveCT, enterEvent),
+	 OP(MOVE_SERVO_MSG, moveToServoPositionsCalibrate, enterEvent),
+	 FIELD(manualServoCal, POS_SERVO_MSG, VOID_MSG, 0, 180, 1, 0,
+		   servoPositionsCalibrate, enterEvent, noStyle),
+	 EXIT(BACK_MSG));
 
 MENU(calibrationMenu, CALIBRATE_MSG, doNothing, noEvent, noStyle,
 	 OP(DARKCALIBRATION_MSG, darkCal, enterEvent),
@@ -27,10 +31,13 @@ MENU(calibrationMenu, CALIBRATE_MSG, doNothing, noEvent, noStyle,
 	 OP(CURRENTDARK_MSG, currentDarkCal, enterEvent),
 	 OP(CURRENTWHITE_MSG, currentWhiteCal, enterEvent),
 	 SUBMENU(manualCalibrationMenu),
-	 OP(NEURONACALIBRATION_MSG, doNothing, enterEvent) // Training in Neuron
-	 ,
 	 FIELD(manualServoCal, SERVOVEL_MSG, VOID_MSG, 0, 180, 1, 0,
 		   manualServoCalibrate, enterEvent, noStyle),
+	 OP(GET_POS_SERVO_MSG, getPosServoCalibrate, enterEvent),
+	 FIELD(uServoCal, set_uS_USERVO_MSG, VOID_MSG, 0, 2700, 10, 0,
+		   uServoCalibrate, enterEvent, noStyle),
+	 OP(get_uS_USERVO_MSG, getuServoCalibrate, enterEvent),
+	 OP(NEURONACALIBRATION_MSG, doNothing, enterEvent), // Training in Neuron
 	 EXIT(BACK_MSG));
 #endif
 
