@@ -12,6 +12,7 @@ void resetSMRun() {
 			resetSMSignal = true;
 			Serial.print(" - ");
 			Serial.println(resetSMSignal);
+			SMTicker.resume();
 		}
 		if (data == 'S') {
 			Serial.print(" - Current SM Signal: ");

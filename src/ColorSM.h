@@ -2,6 +2,11 @@
 #define _TCS3200COLORSM_H
 
 #include <StateMachine.h>
+#define SMinterval 100
+
+StateMachine colorDrum = StateMachine();
+void handleSMRun() { colorDrum.run(); }
+Ticker SMTicker(handleSMRun, SMinterval, 0, MILLIS);
 
 #if CONTINUOUS_COLORSM
 #define NUM_STATES 5
@@ -9,8 +14,6 @@
 #include "ResetSM.h"
 #define NUM_STATES 6
 #endif
-
-#define SMinterval 100
 
 enum STATE {
 	ENTRY = 0,
@@ -25,12 +28,6 @@ enum STATE {
 };
 
 STATE currentState = ENTRY;
-
-StateMachine colorDrum = StateMachine();
-
-void handleSMRun() { colorDrum.run(); }
-
-Ticker SMTicker(handleSMRun, SMinterval, 0, MILLIS);
 
 void nextState() {
 	currentState = static_cast<STATE>((currentState + 1) % NUM_STATES);
@@ -91,6 +88,7 @@ void S5_waitSignal() {
 		servoDrum.write(SERVO_STOPPOWER);
 		nextState();
 		resetSMSignal = false;
+		SMTicker.pause();
 	}
 }
 State *S5 = colorDrum.addState(&S5_waitSignal);
