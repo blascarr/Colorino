@@ -29,25 +29,24 @@ void ST1_moveDrum() {
 }
 
 void ST2_stopDrum() {
-	Serial.println("Stop Drum");
 	currentTestState = STOPDRUM;
 	servoDrum.write(SERVO_STOPPOWER);
-	SMTickerTest.pause();
+	SMTickerTest.stop();
 }
 
 bool IRFreeWhileMoving() {
 	// IRFired = 1 if DARK
-	return !IRFired && currentTestState == MOVEDRUM;
+	return IRFired && currentTestState == MOVEDRUM;
 }
 
 bool IRNotFreeWhileMoving() {
 	// IRFired = 1 if WHITE
-	return IRFired && currentTestState == MOVEDRUM;
+	return !IRFired && currentTestState == MOVEDRUM;
 }
 
 bool IRFreeState() {
 	// IRFired = 0 if WHITE
-	return IRFired && currentTestState == STOPDRUM;
+	return !IRFired && currentTestState == STOPDRUM;
 }
 
 State *ST0 = colorTestDrum.addState(&ST0_moveDrum);
@@ -57,6 +56,5 @@ void colorSMTest() {
 	ST0->addTransition(&IRFreeWhileMoving, ST1);
 	ST1->addTransition(&IRNotFreeWhileMoving, ST2);
 	ST2->addTransition(&IRFreeState, ST0);
-	SMTickerTest.start();
 }
 #endif

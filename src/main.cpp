@@ -41,7 +41,7 @@ void handleIREvent() {
 
 #include "ColorSM.h"
 
-// #include "CalibratorSM.h"
+#include "CalibratorSM.h"
 #include "MenuEvents.h"
 
 void setup() {

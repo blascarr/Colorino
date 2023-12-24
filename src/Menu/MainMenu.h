@@ -9,7 +9,7 @@ result readColor(eventMask e, navNode &nav, prompt &item) {
 result nextDrumStep(eventMask e, navNode &nav, prompt &item) {
 #ifdef _TCS3200CALIBRATIONSM_H
 	currentTestState = MOVEDRUM;
-	SMTickerTest.resume();
+	SMTickerTest.start();
 #endif
 	return proceed;
 }
