@@ -11,6 +11,9 @@
 #define DRUMSERVO_PIN 9
 #define SELECTORSERVO_PIN 10
 #define IRinterval 10
+#define IR_INPUT_PULLUP true
+
+#define CONTINUOUS_COLORSM false
 
 #define LCD_SUPPORT true
 

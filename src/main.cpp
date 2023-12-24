@@ -7,10 +7,10 @@
 #include <TCS3200.h>
 #include <Ticker.h>
 
-#define ARDUINO_AVR_UNO
+// #define ARDUINO_AVR_UNO
 // #define ESP8266
 
-#include "pins.h"
+#include "config.h"
 
 #include "ColorMenu.h"
 
