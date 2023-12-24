@@ -14,6 +14,14 @@ result nextDrumStep(eventMask e, navNode &nav, prompt &item) {
 	return proceed;
 }
 
+#if !CONTINUOUS_COLORSM
+result resetSM(eventMask e, navNode &nav, prompt &item) {
+	resetSMSignal = true;
+	SMTicker.resume();
+	return proceed;
+}
+#endif
+
 #ifdef _TCS3200CALIBRATIONMENU_H
 MENU(manualCalibrationMenu, MANUALCALIBRATION_MSG, doNothing, noEvent, noStyle,
 	 FIELD(manualColorCal, COLOR_MSG, VOID_MSG, 0, 7, 1, 0, manualCalibrate,
@@ -44,6 +52,9 @@ MENU(calibrationMenu, CALIBRATE_MSG, doNothing, noEvent, noStyle,
 #endif
 
 MENU(mainMenu, MAINMENU_MSG, doNothing, noEvent, wrapStyle,
+#if !CONTINUOUS_COLORSM
+	 OP(RESETSM_MSG, resetSM, enterEvent),
+#endif
 	 OP(READCOLOR_MSG, readColor, enterEvent),
 	 OP(NEXTDRUMSTEP_MSG, nextDrumStep, enterEvent)
 #ifdef _TCS3200CALIBRATIONMENU_H
