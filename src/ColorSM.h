@@ -2,7 +2,6 @@
 #define _TCS3200COLORSM_H
 
 #include <StateMachine.h>
-#define SMinterval 100
 
 StateMachine colorDrum = StateMachine();
 void handleSMRun() { colorDrum.run(); }

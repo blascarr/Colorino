@@ -14,22 +14,13 @@
 
 #include "ColorMenu.h"
 
-uint8_t SERVO_PEEKPOWER = 102;
-uint8_t SERVO_STOPPOWER = 90;
-
 TCS3200 CS(TCS3200_S2, TCS3200_S3, TCS3200_OUT, TCS3200_S0, TCS3200_S1,
 		   TCS3200_LED);
 SerialDebugger SerialDebug = SerialDebugger();
 TCS3200Debug CSDebug(CS, SerialDebug);
 Servo servoDrum;
 Servo servoSelector;
-float positions[] = {0, 25, 50, 78, 113, 140, 170, 170};
-float selectorOffset = 0;
-
 Bounce IREvent = Bounce();
-
-bool IRFired = true;
-int currentColor = 0;
 
 void handleIREvent() {
 	IREvent.update();

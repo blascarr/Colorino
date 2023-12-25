@@ -2,7 +2,7 @@
 #define _TCS3200CALIBRATIONSM_H
 
 #include <StateMachine.h>
-#define SMTestinterval 100
+
 StateMachine colorTestDrum = StateMachine();
 
 enum TESTSTATE {

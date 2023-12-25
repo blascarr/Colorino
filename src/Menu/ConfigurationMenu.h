@@ -1,9 +1,6 @@
 #ifndef _TCS3200CONFIGURATIONMENU_H
 #define _TCS3200CONFIGURATIONMENU_H
 
-bool ledState = true;
-int freq = TCS3200_FREQ_HI;
-
 result setFrequency(eventMask e, navNode &nav, prompt &item) {
 	CS.setFrequency(freq);
 	return proceed;
@@ -49,6 +46,10 @@ result LEDToReadEvent(eventMask e, navNode &nav, prompt &item) {
 	return proceed;
 }
 
+result saveConfigInEEPROM(eventMask e, navNode &nav, prompt &item) {
+	return proceed;
+}
+
 TOGGLE(ledState, LEDToggle, LED_MSG, doNothing, noEvent, noStyle,
 	   VALUE(ON_MSG, HIGH, ledEvent, enterEvent),
 	   VALUE(OFF_MSG, LOW, ledEvent, enterEvent));
@@ -68,6 +69,10 @@ TOGGLE(rgbState, RGBToggle, RGBMODE_MSG, doNothing, noEvent, noStyle,
 	   VALUE(RGB_MSG, HIGH, rgbMode, enterEvent),
 	   VALUE(RAW_MSG, LOW, rgbMode, enterEvent));
 
+TOGGLE(IR_INPUT_PULLUP, IRInputToggle, IR_INPUTLOGIC_MSG, doNothing, noEvent,
+	   noStyle, VALUE(ON_MSG, HIGH, doNothing, enterEvent),
+	   VALUE(OFF_MSG, LOW, doNothing, enterEvent));
+
 MENU(configurationMenu, SENSORCONFIG_MSG, doNothing, noEvent, noStyle,
 	 SUBMENU(LEDToggle),
 	 FIELD(refreshTime, REFRESHTIME_MSG, VOID_MSG, 0, 1000, 100, 10,
@@ -75,7 +80,8 @@ MENU(configurationMenu, SENSORCONFIG_MSG, doNothing, noEvent, noStyle,
 	 FIELD(samples, SAMPLES_MSG, VOID_MSG, 0, 500, 50, 10, setSamples,
 		   enterEvent, wrapStyle),
 	 SUBMENU(RGBToggle), OP(REALATIVECOLOR_MSG, readRelativeColor, enterEvent),
-	 SUBMENU(LEDToReadToggle), SUBMENU(frequencyToggle),
-	 OP(GETFREQUENCY_MSG, getFrequency, enterEvent), EXIT(BACK_MSG));
+	 SUBMENU(LEDToReadToggle), SUBMENU(IRInputToggle), SUBMENU(frequencyToggle),
+	 OP(GETFREQUENCY_MSG, getFrequency, enterEvent),
+	 OP(SAVE_CONFIG_MSG, saveConfigInEEPROM, enterEvent), EXIT(BACK_MSG));
 
 #endif

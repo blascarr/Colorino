@@ -11,12 +11,48 @@
 #define DRUMSERVO_PIN 9
 #define SELECTORSERVO_PIN 10
 #define IRinterval 10
-#define IR_INPUT_PULLUP true
+bool IR_INPUT_PULLUP = true;
 
 #define CONTINUOUS_COLORSM false
 #if !CONTINUOUS_COLORSM
 bool resetSMSignal = false;
 #endif
+
+/* Global Variables */
+bool ledState = true;
+int freq = TCS3200_FREQ_HI;
+float positions[] = {0, 25, 50, 78, 113, 140, 170, 170};
+float selectorOffset = 0;
+bool IRFired = true;
+int currentColor = 0;
+
+#define SMinterval 100
+#define SMTestinterval 100
+uint8_t SERVO_PEEKPOWER = 102;
+uint8_t SERVO_STOPPOWER = 90;
+
+/* Menu Global Variables */
+int refreshTime = 500;
+int samples = 50;
+enum Colors {
+	WHITE = 1,
+	BLACK = 0,
+	YELLOW = 2,
+	ORANGE = 3,
+	RED = 4,
+	GREEN = 5,
+	BLUE = 6,
+	BROWN = 7
+};
+const char *colorNames[] = {"WHITE", "BLACK", "YELLOW", "ORANGE",
+							"RED",	 "GREEN", "BLUE",	"BROWN"};
+
+enum RGBMode { RGB, RAW };
+int manualColorCal = 0;
+int manualServoCal = SERVO_PEEKPOWER;
+int uServoCal = 0;
+RGBMode rgbState = RGB; // Default Mode - RGB
+String freqStates[4] = {" - HIGH 100%", " - MID 20%", " - LOW 2%", " - OFF 0%"};
 
 #define LCD_SUPPORT true
 
