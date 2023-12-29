@@ -47,14 +47,14 @@ void S1_moveDrum() {
 void S2_readColor() {
 	servoDrum.write(SERVO_STOPPOWER);
 	if (colorDrum.executeOnce) {
-		currentColor = CS.readLastColorID();
+		CS.readColor();
 		nextState();
 	}
 }
 
 void S3_selectorSlider() {
 	if (colorDrum.executeOnce) {
-		servoSelector.write(positions[currentColor] + selectorOffset);
+		servoSelector.write(positions[CS.readLastColorID()] + selectorOffset);
 		servoDrum.write(SERVO_PEEKPOWER);
 		nextState();
 	}
