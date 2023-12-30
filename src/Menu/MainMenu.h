@@ -51,24 +51,25 @@ MENU(calibrationMenu, CALIBRATE_MSG, doNothing, noEvent, noStyle,
 	 EXIT(BACK_MSG));
 #endif
 
-MENU(mainMenu, MAINMENU_MSG, doNothing, noEvent, wrapStyle,
+prompt *mainMenuOptions[] = {
 #if !CONTINUOUS_COLORSM
-	 OP(RESETSM_MSG, resetSM, enterEvent),
+	new prompt(RESETSM_MSG, (Menu::callback)resetSM, enterEvent),
 #endif
-	 OP(READCOLOR_MSG, readColor, enterEvent),
-	 OP(NEXTDRUMSTEP_MSG, nextDrumStep, enterEvent)
+	new prompt(READCOLOR_MSG, (Menu::callback)readColor, enterEvent),
+	new prompt(NEXTDRUMSTEP_MSG, (Menu::callback)nextDrumStep, enterEvent),
 #ifdef _TCS3200CALIBRATIONMENU_H
-		 ,
-	 SUBMENU(calibrationMenu)
+	&calibrationMenu,
 #endif
 #ifdef _TCS3200EEPROMMENU_H
-		 ,
-	 SUBMENU(eepromMenu)
+	&eepromMenu,
 #endif
 #ifdef _TCS3200CONFIGURATIONMENU_H
-		 ,
-	 SUBMENU(configurationMenu)
+	&configurationMenu
 #endif
-);
+};
+
+menuNode &mainMenu =
+	*new menuNode(MAINMENU_MSG, sizeof(mainMenuOptions) / sizeof(prompt *),
+				  mainMenuOptions, doNothing, noEvent, wrapStyle);
 
 NAVROOT(nav, mainMenu, MAX_DEPTH, in, out); // the navigation root object
